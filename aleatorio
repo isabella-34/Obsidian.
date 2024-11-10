@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar imagen condicionalmente</title>
+    <script>
+        function mostrarImagen() {
+            // URLs de las imágenes
+            const imagen1 = "https://i.pinimg.com/564x/68/4b/c3/684bc340f3b189650bfbc7994f0f4261.jpg";
+            const imagen2 = "https://i.pinimg.com/564x/29/02/66/29026651b0bbd3074e8e18c4e6c94acb.jpg";
+
+            // Obtener el contador de visitas del almacenamiento local
+            let contador = localStorage.getItem("contadorVisitas");
+
+            // Si el contador no existe, inicialízalo en 0
+            if (contador === null) {
+                contador = 0;
+            } else {
+                contador = parseInt(contador);
+            }
+
+            // Seleccionar la imagen a mostrar
+            let imagenSeleccionada;
+            if (contador < 5) {
+                imagenSeleccionada = imagen1;
+                localStorage.setItem("contadorVisitas", contador + 1);  // Incrementar el contador
+            } else {
+                imagenSeleccionada = imagen2;
+            }
+
+            // Mostrar la imagen en la página
+            document.getElementById("imagen").src = imagenSeleccionada;
+        }
+
+        // Llama a la función cuando se carga la página
+        window.onload = mostrarImagen;
+    </script>
+</head>
+<body>
+    <h1>[Ingresando a base de datos]</h1>
+    <img id="imagen" src="" alt="Imagen Condicional">
+</body>
+</html>
